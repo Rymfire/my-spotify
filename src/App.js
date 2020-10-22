@@ -1,24 +1,21 @@
-import React, { Component } from "react";
+import React from 'react';
 import {
-    BrowserRouter,
-    Route
+  BrowserRouter,
+  Route
 } from "react-router-dom";
-import Auth from "./routes/auth";
-import Home from "./routes/home";
+import './App.css';
+import Auth from "./routes/Auth";
+import Home from "./routes/Home";
 
-class App extends Component {
-    state = {}
-    render() {
-        console.log("Hello world !");
-        return (
-            <BrowserRouter>
-                <div>
-                    <Route exact path="/" component={Auth} />
-                    <Route path="/home" component={Home} />
-                </div>
-            </BrowserRouter>
-        );
-    }
+function App() {
+  return (
+      <BrowserRouter>
+        <div>
+          <Route exact path="/" component={Auth} />
+          <Route path="/home" component={Home} />
+        </div>
+      </BrowserRouter>
+  );
 }
 
 export default App;
