@@ -1,7 +1,5 @@
-import axios from 'axios';
-
 export const spotify = {
-    SignIn,
+    getAuthorizationCode,
 }
 
 class SpotifySignInPopup {
@@ -18,7 +16,7 @@ class SpotifySignInPopup {
                     if (!popup || popup.closed) {
                         this.close();
 
-                        reject({code: 'POPUP_CLOSED', message: 'The signin popup was closed'});
+                        reject({code: 'SIGNIN_POPUP_CLOSED'});
 
                         return;
                     }
@@ -29,14 +27,7 @@ class SpotifySignInPopup {
                     const data = popup.location.search;
                     const res = data.substr(1).split('=')[1];
 
-                    console.log({
-                        code: res,
-                        error: (res) ? false :  true,
-                    });
-                    resolve({
-                        code: res,
-                        error: (res) ? false :  true,
-                    });
+                    resolve({code: res});
 
                     this.close();
                 } catch (err) {
@@ -64,7 +55,7 @@ class SpotifySignInPopup {
     }
 }
 
-function SignIn() {
+function getAuthorizationCode() {
     const data = {
         client_id: 'e4459a6e0f8c492087acf5c9def1537e',
         scope: 'user-read-private',
