@@ -1,14 +1,11 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import tokensActions from "../redux/actions/tokensActions";
+import userActions from "../redux/actions/userActions";
 
 class MyUserPage extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
-        this.props.getAccessToken();
     }
 
     render() {
@@ -27,6 +24,7 @@ function mapStateToProps(state) {
 
 const actionCreators = {
     getAccessToken: tokensActions.getAccessToken,
+    getMyUser: userActions.getMyUser
 }
 
 export default connect(mapStateToProps, actionCreators)(MyUserPage);

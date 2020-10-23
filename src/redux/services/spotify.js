@@ -7,7 +7,11 @@ export const spotify = {
     getAuthorizationCode,
     getAccessTokenWithAuthorizationCode,
     getAccessTokenWithRefreshToken,
+    getMyUser,
 }
+
+
+// AUTHORIZATION FLOW
 
 class SpotifySignInPopup {
     constructor(data) {
@@ -108,3 +112,22 @@ function getAccessTokenWithRefreshToken(refreshToken) {
         headers: headers,
     });
 }
+
+// AUTHORIZATION FLOW END
+
+// USER FUNCTIONS
+
+function getMyUser(tokens) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/me`,
+        headers: headers,
+    });
+}
+
+// USER FUNCTIONS END
