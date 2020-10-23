@@ -11,8 +11,8 @@ class Auth extends Component {
 }
 
 function mapState(state) {
-    const {token} = state;
-    return {token};
+    const {tokens} = state;
+    return {tokens};
 }
 
 const actionCreators = {

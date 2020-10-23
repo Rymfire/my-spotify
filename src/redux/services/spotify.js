@@ -1,5 +1,12 @@
+import utils from "../../utils";
+
+const axios = require("axios");
+const qs = require("qs")
+
 export const spotify = {
     getAuthorizationCode,
+    getAccessTokenWithAuthorizationCode,
+    getAccessTokenWithRefreshToken,
 }
 
 class SpotifySignInPopup {
@@ -57,10 +64,47 @@ class SpotifySignInPopup {
 
 function getAuthorizationCode() {
     const data = {
-        client_id: 'e4459a6e0f8c492087acf5c9def1537e',
+        client_id: utils.client_id,
         scope: 'user-read-private',
         redirect_uri: 'http://localhost:3000',
         response_type: 'code'
     };
     return new SpotifySignInPopup(data);
+}
+
+function getAccessTokenWithAuthorizationCode(authorizationCode) {
+    const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    const body = {
+        'grant_type': "authorization_code",
+        'code': authorizationCode,
+        'redirect_uri': `http://localhost:3000`,
+        'client_id': utils.client_id,
+        'client_secret': utils.client_secret
+    };
+    return axios({
+        method: 'post',
+        url: `https://accounts.spotify.com/api/token`,
+        data: qs.stringify(body),
+        headers: headers,
+    });
+}
+
+function getAccessTokenWithRefreshToken(refreshToken) {
+    const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    const body = {
+        'grant_type': "refresh_token",
+        'refresh_token': refreshToken,
+        'client_id': utils.client_id,
+        'client_secret': utils.client_secret
+    };
+    return axios({
+        method: 'post',
+        url: `https://accounts.spotify.com/api/token`,
+        data: qs.stringify(body),
+        headers: headers,
+    });
 }

@@ -1,21 +1,20 @@
-import React from 'react';
-import {
-  BrowserRouter,
-  Route
-} from "react-router-dom";
+import React, {Component} from 'react';
 import './App.css';
+import {connect} from "react-redux";
+import Router from "./routes";
 import Auth from "./routes/Auth";
-import Home from "./routes/Home";
 
-function App() {
-  return (
-      <BrowserRouter>
-        <div>
-          <Route exact path="/" component={Auth} />
-          <Route path="/home" component={Home} />
-        </div>
-      </BrowserRouter>
-  );
+class App extends Component {
+    render() {
+        return (this.props.tokens.authorization_code.code) ? <Router/> : <Auth/>;
+    }
 }
 
-export default App;
+function mapStateToProps(state) {
+    const {tokens} = state;
+    return {tokens};
+}
+
+const actionCreators = {}
+
+export default connect(mapStateToProps, actionCreators)(App);
