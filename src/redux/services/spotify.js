@@ -1,4 +1,4 @@
-import utils from "../../utils";
+import utils from "../../utils/utils";
 
 const axios = require("axios");
 const qs = require("qs")

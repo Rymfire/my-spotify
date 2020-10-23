@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { ThemeProvider } from "@material-ui/core/styles";
+import Theme from "./utils/theme";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
@@ -8,9 +10,11 @@ import {store} from './helpers/store';
 
 ReactDOM.render(
   <React.StrictMode>
-      <Provider store={store}>
-          <App />
-      </Provider>
+    <Provider store={store}>
+      <ThemeProvider theme={Theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -19,4 +23,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
