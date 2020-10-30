@@ -2,8 +2,9 @@ import {spotify} from "../services/spotify";
 import tokensConstants from "../constants/tokensConstants";
 
 const tokensActions = {
-    getAuthorizationCode: getAuthorizationCode,
-    getAccessToken: getAccessToken,
+    getAuthorizationCode,
+    getAccessToken,
+    getAuthorizationCodeAndAccessToken,
 }
 
 const authorizationCode = {
@@ -49,7 +50,7 @@ const accessToken = {
 function getAuthorizationCode() {
     return (dispatch, getState) => {
         dispatch(authorizationCode.request());
-        spotify.getAuthorizationCode()
+        return spotify.getAuthorizationCode()
             .then(
                 res => {
                     dispatch(authorizationCode.success(res.code));
@@ -66,7 +67,7 @@ function getAccessToken() {
         const {tokens} = getState();
         dispatch(accessToken.request());
         if (!tokens.tokens.access_token) {
-            spotify.getAccessTokenWithAuthorizationCode(tokens.authorization_code.code).then(
+            return spotify.getAccessTokenWithAuthorizationCode(tokens.authorization_code.code).then(
                 res => {
                     dispatch(accessToken.success(res.data));
                 },
@@ -75,7 +76,7 @@ function getAccessToken() {
                 }
             );
         } else {
-            spotify.getAccessTokenWithRefreshToken(tokens.tokens.refresh_token).then(
+            return spotify.getAccessTokenWithRefreshToken(tokens.tokens.refresh_token).then(
                 res => {
                     dispatch(accessToken.success(res.data));
                 },
@@ -85,6 +86,11 @@ function getAccessToken() {
             );
         }
     }
+}
+
+function getAuthorizationCodeAndAccessToken() {
+    return (dispatch) =>
+        dispatch(getAuthorizationCode()).then(() => dispatch(getAccessToken()));
 }
 
 export default tokensActions;

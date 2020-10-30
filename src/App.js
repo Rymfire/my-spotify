@@ -6,7 +6,7 @@ import Auth from "./routes/Auth";
 
 class App extends Component {
     render() {
-        return (this.props.tokens.authorization_code.code) ? <Router/> : <Auth/>;
+        return (this.props.tokens.authorization_code.code && !this.props.tokens.requesting.authorization_code) ? <Router/> : <Auth/>;
     }
 }
 

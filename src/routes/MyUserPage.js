@@ -9,11 +9,14 @@ class MyUserPage extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <button onClick={this.props.getAccessToken}>Refresh</button>
-            </div>
-        )
+        if (this.props.tokens.authorization_code.code) {
+            return (
+                <div>
+                    <button onClick={this.props.getAccessToken}>Refresh</button>
+                    <button onClick={this.props.getMyUser}>User</button>
+                </div>
+            )
+        }
     }
 }
 
