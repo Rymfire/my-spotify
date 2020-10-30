@@ -8,12 +8,14 @@ export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case userConstants.GET_MY_USER_REQUEST:
             return {
+                ...state,
                 requesting: {
                     myUser: true,
                 }
             };
         case userConstants.GET_MY_USER_SUCCESS:
             return {
+                ...state,
                 requesting: {
                     myUser: false
                 },
@@ -21,6 +23,7 @@ export default function userReducer(state = initialState, action) {
             };
         case userConstants.GET_MY_USER_FAILURE:
             return {
+                ...state,
                 requesting: {
                     myUser: false,
                 },

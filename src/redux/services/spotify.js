@@ -4,10 +4,18 @@ const axios = require("axios");
 const qs = require("qs")
 
 export const spotify = {
+    // TOKEN BEGIN
     getAuthorizationCode,
     getAccessTokenWithAuthorizationCode,
     getAccessTokenWithRefreshToken,
+    // TOKEN END
+    // USER BEGIN
     getMyUser,
+    //USER END
+    // PLAYLIST BEGIN
+    getAllMyUserPlaylists,
+    // PLAYLIST END
+
 }
 
 
@@ -131,3 +139,20 @@ function getMyUser(tokens) {
 }
 
 // USER FUNCTIONS END
+
+// PLAYLIST FUNCTIONS
+
+function getAllMyUserPlaylists(tokens) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/me/playlists?limit=50`,
+        headers: headers,
+    });
+}
+
+// PLAYLIST FUNCTIONS END
