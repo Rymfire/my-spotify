@@ -43,9 +43,7 @@ function mapState(state) {
 
 const actionCreators = {
     getAuthorizationCodeAndAccessToken: tokensActions.getAuthorizationCodeAndAccessToken,
-    getAccessToken: tokensActions.getAccessToken,
-    getAuthorizationCode: tokensActions.getAuthorizationCode,
-    getMyUser: userActions.getMyUser,
 }
 
 export default connect(mapState, actionCreators)(Auth);
+
