@@ -9,17 +9,33 @@ export const spotify = {
     getAccessTokenWithAuthorizationCode,
     getAccessTokenWithRefreshToken,
     // TOKEN END
+
     // USER BEGIN
     getMyUser,
+    getUser,
+    getTop,
     //USER END
+
     // PLAYLIST BEGIN
     getAllMyUserPlaylists,
     // PLAYLIST END
 
+    // ARTIST BEGIN
+    getArtist,
+    // ARTIST END
+
+    // SEARCH BEGIN
+    search,
+    // SEARCH END
+
+    // ALBUM BEGIN
+    getAlbum,
+    // ALBUM END
+
 }
 
 
-// AUTHORIZATION FLOW
+// AUTHORIZATION FLOW BEGIN
 
 class SpotifySignInPopup {
     constructor(data) {
@@ -123,7 +139,7 @@ function getAccessTokenWithRefreshToken(refreshToken) {
 
 // AUTHORIZATION FLOW END
 
-// USER FUNCTIONS
+// USER FUNCTIONS BEGIN
 
 function getMyUser(tokens) {
     const headers = {
@@ -138,9 +154,35 @@ function getMyUser(tokens) {
     });
 }
 
+function getUser(tokens, uid) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/users/${uid}`,
+        headers: headers,
+    });
+}
+
+function getTop(tokens) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/me/top`,
+        headers: headers,
+    });
+}
+
 // USER FUNCTIONS END
 
-// PLAYLIST FUNCTIONS
+// PLAYLIST FUNCTIONS BEGIN
 
 function getAllMyUserPlaylists(tokens) {
     const headers = {
@@ -156,3 +198,52 @@ function getAllMyUserPlaylists(tokens) {
 }
 
 // PLAYLIST FUNCTIONS END
+
+// ARTIST FUNCTIONS BEGIN
+
+function getArtist(tokens, uid) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/artists/${uid}`,
+        headers: headers,
+    });
+}
+
+// ARTIST FUNCTIONS END
+
+// SEARCH FUNCTION BEGIN
+function search(tokens, query, options) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    const formatedQuery = `q=${query.replaceAll(' ', '%20')}`;
+    const formatedType = `type=${options.type}`;
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/search?${formatedQuery}&${formatedType}`,
+        headers: headers,
+    });
+}
+// SEARCH FUNCTION END
+
+// ALBUM FUNCTION BEGIN
+function getAlbum(tokens, uid) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/albums/${uid}`,
+        headers: headers,
+    });
+}
+// ALBUM FUNCTION END

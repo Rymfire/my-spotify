@@ -10,6 +10,7 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting ? state.requesting : {}),
                     myUser: true,
                 }
             };
@@ -17,6 +18,7 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting ? state.requesting : {}),
                     myUser: false
                 },
                 myUser: {...action.data, ...{error: null}},
@@ -25,12 +27,44 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting ? state.requesting : {}),
                     myUser: false,
                 },
                 myUser: {
                     error: action.error,
                 }
             };
+        case userConstants.GET_TOP_REQUEST:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    myTop: true,
+                }
+            };
+        case userConstants.GET_TOP_SUCCESS:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    myTop: false,
+                },
+                myTop: {
+                    result: action.data,
+                    error: null,
+                },
+            }
+        case userConstants.GET_TOP_FAILURE:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    myTop: false,
+                },
+                myTop: {
+                    error: action.error,
+                }
+            }
         default:
             return state;
     }
