@@ -9,7 +9,6 @@ import userActions from "../redux/actions/userActions";
 
 class Auth extends Component {
     render() {
-        console.log(this.props);
         return(
             <div className="login">
                 <img
