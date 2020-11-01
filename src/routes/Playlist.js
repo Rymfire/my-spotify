@@ -2,7 +2,7 @@ import searchActions from "../redux/actions/searchActions";
 import {connect} from "react-redux";
 import React, {Component} from "react";
 import playlistActions from "../redux/actions/playlistActions";
-import TrackList from "../components/Album/TrackList";
+import TrackList from "../components/Playlist/TrackList";
 
 class Playlist extends Component {
     componentDidMount() {
@@ -22,7 +22,7 @@ class Playlist extends Component {
             return (
                 <div>
                     <div>
-                        <img src={this.props.playlist.playlist.data.images[1].url}/>
+                        <img src={this.props.playlist.playlist.data.images[0].url}/>
                         <p>{this.props.playlist.playlist.data.name}</p>
                         <p>By: {this.props.playlist.playlist.data.owner.display_name}</p>
                     </div>

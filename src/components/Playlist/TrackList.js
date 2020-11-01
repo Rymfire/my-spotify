@@ -30,25 +30,28 @@ export default class TrackList extends Component {
     }
 
     formateTrackLine(track) {
+        console.log(track);
         return (
             <TableRow>
-                <TableCell align="right">{track.track_number}</TableCell>
                 <TableCell align="right">{track.name}</TableCell>
                 <TableCell align="right">{this.formateArtists(track.artists)}</TableCell>
+                <TableCell align="right">{track.album.name}</TableCell>
+                <TableCell align="right">{track.track_number}</TableCell>
                 <TableCell align="right">{this.formateDuration(track.duration_ms)}</TableCell>
             </TableRow>
         );
     }
 
     render() {
-        const formatedLineList = this.props.value.items.map((value) => this.formateTrackLine((value.track) ? value.track : value));
+        const formatedLineList = this.props.value.items.map((value) => this.formateTrackLine(value.track));
         return (
             <TableContainer component={Paper}>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="right">#</TableCell>
                         <TableCell align="right">Title</TableCell>
                         <TableCell align="right">Artist</TableCell>
+                        <TableCell align="right">Album</TableCell>
+                        <TableCell align="right">#</TableCell>
                         <TableCell align="right">Duration</TableCell>
                     </TableRow>
                 </TableHead>

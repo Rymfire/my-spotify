@@ -6,6 +6,7 @@ import userActions from "../redux/actions/userActions";
 import tokensActions from "../redux/actions/tokensActions";
 import TopArtists from "../components/Home/TopArtists";
 import TopTracks from "../components/Home/TopTracks";
+import MyPlaylists from "../components/Home/MyPlaylists";
 
 class Home extends Component {
     componentDidMount() {
@@ -17,8 +18,9 @@ class Home extends Component {
             <div>
                 <h1>Home</h1>
                 <SearchBar history={this.props.history}/>
-                <TopArtists history={this.props.history}/>
-                <TopTracks history={this.props.history}/>
+                <MyPlaylists history={this.props.history}/>
+                {/*<TopArtists history={this.props.history}/>*/}
+                {/*<TopTracks history={this.props.history}/>*/}
                 <button onClick={this.props.logout}>logout</button>
             </div>
         );

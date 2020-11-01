@@ -150,6 +150,7 @@ function getAllTop() {
     return (dispatch, getState) => {
         dispatch(getTopArtists());
         dispatch(getTopTracks());
+        dispatch(getMyPlaylists());
     }
 }
 

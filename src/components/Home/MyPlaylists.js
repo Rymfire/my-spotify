@@ -4,7 +4,7 @@ import tokensActions from "../../redux/actions/tokensActions";
 import {connect} from "react-redux";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 
-class TopArtists extends Component {
+class MyPlaylists extends Component {
     formateArtists(artistsList) {
         let formatedArtists = null;
         for (const artist in artistsList) {
@@ -14,14 +14,15 @@ class TopArtists extends Component {
     }
 
     generateCardView(data) {
+        console.log(data);
         return data.map((item) =>
             <Card>
-                <CardActionArea onClick={() => this.props.history.push(`/artist/${item.id}`)}>
+                <CardActionArea onClick={() => this.props.history.push(`/playlist/${item.id}`)}>
                     {(item.images && item.images.length !== 0) ? <CardMedia
                         component="img"
                         height="250"
                         width="250"
-                        image={item.images[1].url}
+                        image={item.images[0].url}
                         title="Card media"
                     /> : null}
                     <CardContent>
@@ -29,7 +30,7 @@ class TopArtists extends Component {
                             {item.name}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {item.followers.total} followers
+                            By: {item.owner.display_name}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -38,8 +39,8 @@ class TopArtists extends Component {
     }
 
     render() {
-        if (this.props.user.topArtists && this.props.user.topArtists.result) {
-            const cardView = this.generateCardView(this.props.user.topArtists.result.items)
+        if (this.props.user.myPlaylists && this.props.user.myPlaylists.result) {
+            const cardView = this.generateCardView(this.props.user.myPlaylists.result.items)
             return (
                 <div>
                     {cardView}
@@ -56,4 +57,4 @@ function mapStateToProps(state) {
     return {user};
 }
 
-export default connect(mapStateToProps, null)(TopArtists);
+export default connect(mapStateToProps, null)(MyPlaylists);
