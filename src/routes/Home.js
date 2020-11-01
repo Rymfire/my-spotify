@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
 import SearchBar from "../components/global/SearchBar";
 import {connect} from "react-redux";
 import userActions from "../redux/actions/userActions";

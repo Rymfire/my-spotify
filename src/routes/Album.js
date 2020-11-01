@@ -24,7 +24,7 @@ class Album extends Component {
             return (
                 <div>
                     <div>
-                        <img src={this.props.album.result.images[1].url}/>
+                        <img src={this.props.album.result.images[1].url} alt="this.props.album.result.name"/>
                         <p>{this.props.album.result.name}</p>
                         By: {this.formateArtists(this.props.album.result.artists)}
                         <p>Release: {this.props.album.result.release_date}</p>

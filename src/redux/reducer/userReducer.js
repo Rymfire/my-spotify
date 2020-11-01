@@ -34,6 +34,34 @@ export default function userReducer(state = initialState, action) {
                     error: action.error,
                 }
             };
+        case userConstants.GET_USER_REQUEST:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    user: true,
+                }
+            };
+        case userConstants.GET_USER_SUCCESS:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    user: false
+                },
+                user: {...action.data, ...{error: null}},
+            };
+        case userConstants.GET_USER_FAILURE:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    user: false,
+                },
+                user: {
+                    error: action.error,
+                }
+            };
         case userConstants.GET_TOP_ARTISTS_REQUEST:
             return {
                 ...state,
@@ -124,6 +152,37 @@ export default function userReducer(state = initialState, action) {
                     myPlaylists: false,
                 },
                 myPlaylists: {
+                    error: action.error,
+                }
+            };
+        case userConstants.GET_USER_PLAYLISTS_REQUEST:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    userPlaylists: true,
+                }
+            };
+        case userConstants.GET_USER_PLAYLISTS_SUCCESS:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    userPlaylists: false,
+                },
+                userPlaylists: {
+                    result: action.data,
+                    error: null,
+                },
+            };
+        case userConstants.GET_USER_PLAYLISTS_FAILURE:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    userPlaylists: false,
+                },
+                userPlaylists: {
                     error: action.error,
                 }
             };

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 
-class TopTracks extends Component {
+class UserPlaylists extends Component {
     formateArtists(artistsList) {
         let formatedArtists = null;
         for (const artist in artistsList) {
@@ -12,14 +12,15 @@ class TopTracks extends Component {
     }
 
     generateCardView(data) {
+        console.log(data);
         return data.map((item) =>
             <Card>
-                <CardActionArea onClick={() => this.props.history.push(`/album/${item.album.id}`)}>
-                    {(item.album.images && item.album.images.length !== 0) ? <CardMedia
+                <CardActionArea onClick={() => this.props.history.push(`/playlist/${item.id}`)}>
+                    {(item.images && item.images.length !== 0) ? <CardMedia
                         component="img"
                         height="250"
                         width="250"
-                        image={item.album.images[1].url}
+                        image={item.images[0].url}
                         title={item.name}
                     /> : null}
                     <CardContent>
@@ -27,7 +28,7 @@ class TopTracks extends Component {
                             {item.name}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {this.formateArtists(item.artists)}
+                            By: {item.owner.display_name}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -36,8 +37,8 @@ class TopTracks extends Component {
     }
 
     render() {
-        if (this.props.user.topTracks && this.props.user.topTracks.result) {
-            const cardView = this.generateCardView(this.props.user.topTracks.result.items)
+        if (this.props.user.myPlaylists && this.props.user.myPlaylists.result) {
+            const cardView = this.generateCardView(this.props.user.userPlaylists.result.items)
             return (
                 <div>
                     {cardView}
@@ -54,4 +55,4 @@ function mapStateToProps(state) {
     return {user};
 }
 
-export default connect(mapStateToProps, null)(TopTracks);
+export default connect(mapStateToProps, null)(UserPlaylists);

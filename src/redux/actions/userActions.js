@@ -5,6 +5,8 @@ import tokensActions from "./tokensActions";
 const userActions = {
     getMyUser,
     getAllTop,
+    getUser,
+    getUserPlaylists,
 };
 
 const myUser = {
@@ -107,6 +109,26 @@ const playlists = {
     }
 }
 
+const userPlaylists = {
+    request: () => {
+        return {
+            type: userConstants.GET_USER_PLAYLISTS_REQUEST,
+        }
+    },
+    success: (data) => {
+        return {
+            type: userConstants.GET_USER_PLAYLISTS_SUCCESS,
+            data
+        }
+    },
+    failure: (error) => {
+        return {
+            type: userConstants.GET_USER_PLAYLISTS_FAILURE,
+            error
+        }
+    }
+}
+
 function getMyUser() {
     return (dispatch, getState) => {
         dispatch(tokensActions.getAccessToken()).then(() => {
@@ -157,7 +179,7 @@ function getAllTop() {
 function getUser(uid) {
     return (dispatch, getState) => {
         dispatch(tokensActions.getAccessToken()).then(() => {
-            const {tokens, user} = getState();
+            const {tokens} = getState();
             dispatch(user.request());
             spotify.getUser(tokens.tokens, uid).then(
                 res => dispatch(user.success(res.data)),
@@ -175,6 +197,19 @@ function getMyPlaylists() {
             spotify.getMyPlaylists(tokens.tokens).then(
                 res => dispatch(playlists.success(res.data)),
                 error => dispatch(playlists.failure(error))
+            )
+        });
+    }
+}
+
+function getUserPlaylists(uid) {
+    return (dispatch, getState) => {
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(userPlaylists.request());
+            spotify.getUserPlaylists(tokens.tokens, uid).then(
+                res => dispatch(userPlaylists.success(res.data)),
+                error => dispatch(userPlaylists.failure(error))
             )
         });
     }

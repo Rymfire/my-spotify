@@ -9,6 +9,7 @@ import Artist from "./Artist";
 import Album from "./Album";
 import Search from "./Search";
 import Playlist from "./Playlist";
+import User from "./User";
 
 export default function Router() {
     return (
@@ -20,6 +21,7 @@ export default function Router() {
                 <Route path="/album/:uid" component={Album}/>
                 <Route path="/search/:type/:query" component={Search}/>
                 <Route path="/playlist/:uid" component={Playlist}/>
+                <Route path="/user/:uid" component={User}/>
             </div>
         </BrowserRouter>
     )

@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import albumActions from "../redux/actions/albumActions";
 import {connect} from "react-redux";
 import searchActions from "../redux/actions/searchActions";
 import {

@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Link from "@material-ui/core/Link";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 
 export default class SingleAlbum extends Component {

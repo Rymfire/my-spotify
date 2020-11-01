@@ -1,6 +1,4 @@
-import React, {Component} from 'react'
-import userActions from "../../redux/actions/userActions";
-import tokensActions from "../../redux/actions/tokensActions";
+import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 
@@ -22,7 +20,7 @@ class TopArtists extends Component {
                         height="250"
                         width="250"
                         image={item.images[1].url}
-                        title="Card media"
+                        title={item.name}
                     /> : null}
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
