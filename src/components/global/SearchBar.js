@@ -29,7 +29,6 @@ class SearchBar extends Component {
         return (
             <div>
                 <TextField
-                    native
                     placeholder="Search"
                     value={this.state.query}
                     onChange={this.handleChange}

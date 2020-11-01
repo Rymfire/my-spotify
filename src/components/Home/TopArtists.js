@@ -13,7 +13,7 @@ class TopArtists extends Component {
 
     generateCardView(data) {
         return data.map((item) =>
-            <Card>
+            <Card key={`${item.name}-TopArtists`}>
                 <CardActionArea onClick={() => this.props.history.push(`/artist/${item.id}`)}>
                     {(item.images && item.images.length !== 0) ? <CardMedia
                         component="img"

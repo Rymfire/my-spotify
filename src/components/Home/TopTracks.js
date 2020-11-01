@@ -13,7 +13,7 @@ class TopTracks extends Component {
 
     generateCardView(data) {
         return data.map((item) =>
-            <Card>
+            <Card key={`${item.name}-TopTracks`}>
                 <CardActionArea onClick={() => this.props.history.push(`/album/${item.album.id}`)}>
                     {(item.album.images && item.album.images.length !== 0) ? <CardMedia
                         component="img"

@@ -12,7 +12,6 @@ class UserPlaylists extends Component {
     }
 
     generateCardView(data) {
-        console.log(data);
         return data.map((item) =>
             <Card>
                 <CardActionArea onClick={() => this.props.history.push(`/playlist/${item.id}`)}>

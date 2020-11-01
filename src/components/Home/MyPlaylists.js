@@ -12,9 +12,8 @@ class MyPlaylists extends Component {
     }
 
     generateCardView(data) {
-        console.log(data);
         return data.map((item) =>
-            <Card>
+            <Card key={`${item.name}-MyPlaylists`}>
                 <CardActionArea onClick={() => this.props.history.push(`/playlist/${item.id}`)}>
                     {(item.images && item.images.length !== 0) ? <CardMedia
                         component="img"
