@@ -41,7 +41,7 @@ export default class TrackList extends Component {
     }
 
     render() {
-        const formatedLineList = this.props.value.items.map((value) => this.formateTrackLine(value.track));
+        const formatedLineList = this.props.value.items.map((value) => this.formateTrackLine((value.track) ? value.track : value));
         return (
             <TableContainer component={Paper}>
                 <TableHead>

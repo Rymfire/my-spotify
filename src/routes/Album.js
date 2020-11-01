@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import albumActions from "../redux/actions/albumActions";
 import TrackList from "../components/Album/TrackList";
+import Link from "@material-ui/core/Link";
 
 class Album extends Component {
 
@@ -10,9 +11,9 @@ class Album extends Component {
     }
 
     formateArtists(artistsList) {
-        let formatedArtists = null;
+        let formatedArtists = [];
         for (const artist in artistsList) {
-            formatedArtists = (!formatedArtists) ? artistsList[artist].name :`${formatedArtists}, ${artistsList[artist].name}`;
+            formatedArtists.push(<Link to={`/artist/${artistsList[artist].id}`}>{artistsList[artist].name}</Link>);
         }
         return formatedArtists;
     }
@@ -25,7 +26,7 @@ class Album extends Component {
                     <div>
                         <img src={this.props.album.result.images[1].url}/>
                         <p>{this.props.album.result.name}</p>
-                        <p>By: {this.formateArtists(this.props.album.result.artists)}</p>
+                        By: {this.formateArtists(this.props.album.result.artists)}
                         <p>Release: {this.props.album.result.release_date}</p>
                         {copyrights}
                     </div>

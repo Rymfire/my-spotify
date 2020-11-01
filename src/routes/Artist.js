@@ -13,7 +13,7 @@ class Artist extends Component {
         return (
             <div>
                 Artist: {this.props.match.params.uid}
-                <AlbumList value={this.props.artist.albums}/>
+                <AlbumList history={this.props.history} value={this.props.artist.albums}/>
             </div>
         );
     };
