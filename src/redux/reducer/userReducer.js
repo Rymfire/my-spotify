@@ -34,37 +34,68 @@ export default function userReducer(state = initialState, action) {
                     error: action.error,
                 }
             };
-        case userConstants.GET_TOP_REQUEST:
+        case userConstants.GET_TOP_ARTISTS_REQUEST:
             return {
                 ...state,
                 requesting: {
                     ...(state.requesting ? state.requesting : {}),
-                    myTop: true,
+                    topArtists: true,
                 }
             };
-        case userConstants.GET_TOP_SUCCESS:
+        case userConstants.GET_TOP_ARTISTS_SUCCESS:
             return {
                 ...state,
                 requesting: {
                     ...(state.requesting ? state.requesting : {}),
-                    myTop: false,
+                    topArtists: false,
                 },
-                myTop: {
+                topArtists: {
                     result: action.data,
                     error: null,
                 },
-            }
-        case userConstants.GET_TOP_FAILURE:
+            };
+        case userConstants.GET_TOP_ARTISTS_FAILURE:
             return {
                 ...state,
                 requesting: {
                     ...(state.requesting ? state.requesting : {}),
-                    myTop: false,
+                    topArtists: false,
                 },
-                myTop: {
+                topArtists: {
                     error: action.error,
                 }
-            }
+            };
+        case userConstants.GET_TOP_TRACKS_REQUEST:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    topTracks: true,
+                }
+            };
+        case userConstants.GET_TOP_TRACKS_SUCCESS:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    topTracks: false,
+                },
+                topTracks: {
+                    result: action.data,
+                    error: null,
+                },
+            };
+        case userConstants.GET_TOP_TRACKS_FAILURE:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    topTracks: false,
+                },
+                topTracks: {
+                    error: action.error,
+                }
+            };
         default:
             return state;
     }

@@ -4,6 +4,7 @@ import tokensActions from "./tokensActions";
 
 const userActions = {
     getMyUser,
+    getAllTop,
 };
 
 const myUser = {
@@ -26,21 +27,41 @@ const myUser = {
     }
 }
 
-const myTop = {
+const topArtist = {
     request: () => {
         return {
-            type: userConstants.GET_TOP_REQUEST,
+            type: userConstants.GET_TOP_ARTISTS_REQUEST,
         }
     },
     success: (data) => {
         return {
-            type: userConstants.GET_TOP_SUCCESS,
+            type: userConstants.GET_TOP_ARTISTS_SUCCESS,
             data
         }
     },
     failure: (error) => {
         return {
-            type: userConstants.GET_TOP_FAILURE,
+            type: userConstants.GET_TOP_ARTISTS_FAILURE,
+            error
+        }
+    }
+}
+
+const topTracks = {
+    request: () => {
+        return {
+            type: userConstants.GET_TOP_TRACKS_REQUEST,
+        }
+    },
+    success: (data) => {
+        return {
+            type: userConstants.GET_TOP_TRACKS_SUCCESS,
+            data
+        }
+    },
+    failure: (error) => {
+        return {
+            type: userConstants.GET_TOP_TRACKS_FAILURE,
             error
         }
     }
@@ -79,16 +100,36 @@ function getMyUser() {
     }
 }
 
-function getMyTop() {
+function getTopArtists() {
     return (dispatch, getState) => {
         dispatch(tokensActions.getAccessToken()).then(() => {
             const {tokens} = getState();
-            dispatch(myTop.request());
-            spotify.getTop(tokens.tokens).then(
-                res => myTop.success(res),
-                error => myTop.failure(error),
+            dispatch(topArtist.request());
+            spotify.getTopArtists(tokens.tokens).then(
+                res => dispatch(topArtist.success(res.data)),
+                error => dispatch(topArtist.failure(error)),
             )
         });
+    }
+}
+
+function getTopTracks() {
+    return (dispatch, getState) => {
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(topTracks.request());
+            spotify.getTopTracks(tokens.tokens).then(
+                res => dispatch(topTracks.success(res.data)),
+                error => dispatch(topTracks.failure(error)),
+            )
+        });
+    }
+}
+
+function getAllTop() {
+    return (dispatch, getState) => {
+        dispatch(getTopArtists());
+        dispatch(getTopTracks());
     }
 }
 

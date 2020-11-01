@@ -5,6 +5,7 @@ const tokensActions = {
     getAuthorizationCode,
     getAccessToken,
     getAuthorizationCodeAndAccessToken,
+    logout,
 }
 
 const authorizationCode = {
@@ -95,6 +96,10 @@ function getAccessToken() {
 function getAuthorizationCodeAndAccessToken() {
     return (dispatch) =>
         dispatch(getAuthorizationCode()).then(() => dispatch(getAccessToken()));
+}
+
+function logout() {
+    return (dispatch) => dispatch({type: tokensConstants.LOGOUT});
 }
 
 export default tokensActions;

@@ -23,7 +23,6 @@ class Search extends Component {
                 this.props.searchPlaylist(this.props.match.params.query);
                 break;
             case 'track':
-                console.log('track');
                 this.props.searchTrack(this.props.match.params.query);
                 break;
             default:

@@ -13,7 +13,8 @@ export const spotify = {
     // USER BEGIN
     getMyUser,
     getUser,
-    getTop,
+    getTopArtists,
+    getTopTracks,
     //USER END
 
     // PLAYLIST BEGIN
@@ -95,7 +96,7 @@ class SpotifySignInPopup {
 function getAuthorizationCode() {
     const data = {
         client_id: utils.client_id,
-        scope: 'user-read-private',
+        scope: 'user-read-private user-top-read',
         redirect_uri: 'http://localhost:3000',
         response_type: 'code'
     };
@@ -169,7 +170,7 @@ function getUser(tokens, uid) {
     });
 }
 
-function getTop(tokens) {
+function getTopArtists(tokens) {
     const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -177,7 +178,20 @@ function getTop(tokens) {
     };
     return axios({
         method: 'get',
-        url: `https://api.spotify.com/v1/me/top`,
+        url: `https://api.spotify.com/v1/me/top/artists`,
+        headers: headers,
+    });
+}
+
+function getTopTracks(tokens) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/me/top/tracks`,
         headers: headers,
     });
 }

@@ -92,6 +92,8 @@ export default function tokensReducer(state = initialState, action) {
                     error: action.error,
                 }
             }
+        case tokensConstants.LOGOUT:
+            return initialState;
         default:
             return state;
     }
