@@ -19,8 +19,8 @@ class Home extends Component {
                 <h1>Home</h1>
                 <SearchBar history={this.props.history}/>
                 <MyPlaylists history={this.props.history}/>
-                {/*<TopArtists history={this.props.history}/>*/}
-                {/*<TopTracks history={this.props.history}/>*/}
+                <TopArtists history={this.props.history}/>
+                <TopTracks history={this.props.history}/>
                 <button onClick={this.props.logout}>logout</button>
             </div>
         );
