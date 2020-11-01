@@ -9,11 +9,27 @@ class Album extends Component {
         this.props.getAlbum(this.props.match.params.uid);
     }
 
+    formateArtists(artistsList) {
+        let formatedArtists = null;
+        for (const artist in artistsList) {
+            formatedArtists = (!formatedArtists) ? artistsList[artist].name :`${formatedArtists}, ${artistsList[artist].name}`;
+        }
+        return formatedArtists;
+    }
+
     render() {
         console.log(this.props.album);
+        const copyrights = this.props.album.result.copyrights.map((value) => <p>{value.text}</p>)
         if (this.props.album.result && Object.keys(this.props.album.result).length !== 0) {
             return (
                 <div>
+                    <div>
+                        <img src={this.props.album.result.images[1].url}/>
+                        <p>{this.props.album.result.name}</p>
+                        <p>By: {this.formateArtists(this.props.album.result.artists)}</p>
+                        <p>Release: {this.props.album.result.release_date}</p>
+                        {copyrights}
+                    </div>
                     <TrackList value={this.props.album.result.tracks}/>
                 </div>
             );

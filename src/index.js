@@ -6,14 +6,17 @@ import Theme from "./utils/theme";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
-import {store} from './helpers/store';
+import {persistor, store} from './helpers/store';
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={Theme}>
-        <App />
-      </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={Theme}>
+            <App />
+          </ThemeProvider>
+        </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

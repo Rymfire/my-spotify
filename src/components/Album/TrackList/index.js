@@ -30,7 +30,6 @@ export default class TrackList extends Component {
     }
 
     formateTrackLine(track) {
-        console.log(track);
         return (
             <TableRow>
                 <TableCell align="right">{track.track_number}</TableCell>
