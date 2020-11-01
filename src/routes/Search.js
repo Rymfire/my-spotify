@@ -47,7 +47,7 @@ class Search extends Component {
                         image: (item.images.length !== 0) ? item.images[1].url : null,
                         title: item.name,
                         subTitle: this.formateArtists(item.artists),
-                        uid: item.id,
+                        url: `/album/${item.id}`,
                     }
                 });
             case 'artist':
@@ -56,7 +56,7 @@ class Search extends Component {
                         image: (item.images.length !== 0) ? item.images[1].url : null,
                         title: item.name,
                         subTitle: `${item.followers.total} followers`,
-                        uid: item.id,
+                        url: `/artist/${item.id}`,
                     }
                 });
             case 'playlist':
@@ -65,7 +65,7 @@ class Search extends Component {
                         image: (item.images.length !== 0) ? item.images[0].url : null,
                         title: item.name,
                         subTitle: item.owner.display_name,
-                        uid: item.id,
+                        url: `/playlist/${item.id}`,
                     }
                 });
             case 'track':
@@ -74,7 +74,7 @@ class Search extends Component {
                         image: (item.album.images.length !== 0) ? item.album.images[1].url : null,
                         title: item.name,
                         subTitle: this.formateArtists(item.artists),
-                        uid: item.id,
+                        url: `/album/${item.album.id}`,
                     }
                 });
             default:
@@ -85,7 +85,7 @@ class Search extends Component {
     generateCardView(data) {
         return data.map((item) =>
             <Card>
-                <CardActionArea onClick={() => this.props.history.push(`/${this.props.match.params.type}/${item.uid}`)}>
+                <CardActionArea onClick={() => this.props.history.push(item.url)}>
                     {(item.image) ? <CardMedia
                         component="img"
                         height="250"
