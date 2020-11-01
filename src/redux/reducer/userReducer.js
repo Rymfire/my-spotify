@@ -96,6 +96,37 @@ export default function userReducer(state = initialState, action) {
                     error: action.error,
                 }
             };
+        case userConstants.GET_MY_PLAYLISTS_REQUEST:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    myPlaylists: true,
+                }
+            };
+        case userConstants.GET_MY_PLAYLISTS_SUCCESS:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    myPlaylists: false,
+                },
+                myPlaylists: {
+                    result: action.data,
+                    error: null,
+                },
+            };
+        case userConstants.GET_MY_PLAYLISTS_FAILURE:
+            return {
+                ...state,
+                requesting: {
+                    ...(state.requesting ? state.requesting : {}),
+                    myPlaylists: false,
+                },
+                myPlaylists: {
+                    error: action.error,
+                }
+            };
         default:
             return state;
     }

@@ -87,6 +87,26 @@ const user = {
     }
 }
 
+const playlists = {
+    request: () => {
+        return {
+            type: userConstants.GET_MY_PLAYLISTS_REQUEST,
+        }
+    },
+    success: (data) => {
+        return {
+            type: userConstants.GET_MY_PLAYLISTS_SUCCESS,
+            data
+        }
+    },
+    failure: (error) => {
+        return {
+            type: userConstants.GET_MY_PLAYLISTS_FAILURE,
+            error
+        }
+    }
+}
+
 function getMyUser() {
     return (dispatch, getState) => {
         dispatch(tokensActions.getAccessToken()).then(() => {
@@ -141,6 +161,19 @@ function getUser(uid) {
             spotify.getUser(tokens.tokens, uid).then(
                 res => dispatch(user.success(res.data)),
                 error => dispatch(user.failure(error))
+            )
+        });
+    }
+}
+
+function getMyPlaylists() {
+    return (dispatch, getState) => {
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(playlists.request());
+            spotify.getMyPlaylists(tokens.tokens).then(
+                res => dispatch(playlists.success(res.data)),
+                error => dispatch(playlists.failure(error))
             )
         });
     }
