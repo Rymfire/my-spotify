@@ -18,6 +18,7 @@ export const spotify = {
 
     // PLAYLIST BEGIN
     getAllMyUserPlaylists,
+    getPlaylist,
     // PLAYLIST END
 
     // ARTIST BEGIN
@@ -194,6 +195,19 @@ function getAllMyUserPlaylists(tokens) {
     return axios({
         method: 'get',
         url: `https://api.spotify.com/v1/me/playlists?limit=50`,
+        headers: headers,
+    });
+}
+
+function getPlaylist(tokens, uid) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/playlists/${uid}`,
         headers: headers,
     });
 }

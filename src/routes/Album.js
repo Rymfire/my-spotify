@@ -18,9 +18,8 @@ class Album extends Component {
     }
 
     render() {
-        console.log(this.props.album);
-        const copyrights = this.props.album.result.copyrights.map((value) => <p>{value.text}</p>)
         if (this.props.album.result && Object.keys(this.props.album.result).length !== 0) {
+            const copyrights = this.props.album.result.copyrights.map((value) => <p>{value.text}</p>)
             return (
                 <div>
                     <div>
