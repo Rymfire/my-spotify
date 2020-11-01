@@ -22,6 +22,7 @@ export const spotify = {
 
     // ARTIST BEGIN
     getArtist,
+    getArtistAlbum,
     // ARTIST END
 
     // SEARCH BEGIN
@@ -210,6 +211,19 @@ function getArtist(tokens, uid) {
     return axios({
         method: 'get',
         url: `https://api.spotify.com/v1/artists/${uid}`,
+        headers: headers,
+    });
+}
+
+function getArtistAlbum(tokens, uid) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${tokens.token_type} ${tokens.access_token}`
+    };
+    return axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/artists/${uid}/albums`,
         headers: headers,
     });
 }

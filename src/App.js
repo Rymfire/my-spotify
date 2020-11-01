@@ -6,7 +6,10 @@ import Auth from "./routes/Auth";
 
 class App extends Component {
     render() {
-        return (this.props.tokens.authorization_code.code && !this.props.tokens.requesting.authorization_code) ? <Router/> : <Auth/>;
+        return (
+            ((this.props.tokens.authorization_code.code && !this.props.tokens.requesting.authorization_code)
+            && this.props.tokens.tokens
+            && (this.props.tokens.tokens.access_token)) ? <Router/> : <Auth/>);
     }
 }
 

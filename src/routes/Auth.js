@@ -4,7 +4,6 @@ import { Button } from "@material-ui/core";
 import tokensActions from "../redux/actions/tokensActions";
 import { AppIcon } from '../assets';
 import "./Auth.css"
-import userActions from "../redux/actions/userActions";
 
 
 class Auth extends Component {

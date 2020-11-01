@@ -1,7 +1,5 @@
-import playlistConstants from "../constants/playlistConstants";
 import {spotify} from "../services/spotify";
 import searchConstants from "../constants/searchConstants";
-import tokensActions from "./tokensActions";
 
 const searchActions = {
     searchAlbum,

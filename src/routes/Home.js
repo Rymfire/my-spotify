@@ -8,7 +8,7 @@ class Home extends Component {
         return (
             <div>
                 <h1>Home</h1>
-                <Link to="/me">Test</Link>
+                <Link to="/artist/3CnCGFxXbOA8bAK54jR8js">Vald</Link>
                 <SearchBar/>
             </div>
         );

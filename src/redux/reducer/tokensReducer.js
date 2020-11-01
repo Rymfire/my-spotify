@@ -24,6 +24,7 @@ export default function tokensReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting) ? state.requesting : {},
                     authorization_code: true,
                 },
                 authorization_code: {
@@ -34,6 +35,7 @@ export default function tokensReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting) ? state.requesting : {},
                     authorization_code: false,
                 },
                 authorization_code: {
@@ -45,6 +47,7 @@ export default function tokensReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting) ? state.requesting : {},
                     authorization_code: false,
                 },
                 authorization_code: {
@@ -55,6 +58,7 @@ export default function tokensReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting) ? state.requesting : {},
                     access_token: true,
                 },
                 tokens: {
@@ -67,6 +71,7 @@ export default function tokensReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting) ? state.requesting : {},
                     access_token: false,
                 },
                 tokens: {
@@ -80,6 +85,7 @@ export default function tokensReducer(state = initialState, action) {
             return {
                 ...state,
                 requesting: {
+                    ...(state.requesting) ? state.requesting : {},
                     access_token: false
                 },
                 tokens: {

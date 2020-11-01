@@ -92,8 +92,8 @@ function getUser(uid) {
         const {tokens, user} = getState();
         dispatch(user.request());
         spotify.getUser(tokens.tokens, uid).then(
-            res => dispatch(myUser.success(res.data)),
-            error => dispatch(myUser.failure(error))
+            res => dispatch(user.success(res.data)),
+            error => dispatch(user.failure(error))
         )
     }
 }
