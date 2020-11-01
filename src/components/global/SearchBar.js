@@ -56,22 +56,7 @@ class SearchBar extends Component {
                     </Select>
                 </FormControl>
                 <Button onClick={() => {
-                    switch (this.state.type) {
-                        case 'album':
-                            this.props.searchAlbum(this.state.query);
-                            break;
-                        case 'artist':
-                            this.props.searchArtist(this.state.query);
-                            break;
-                        case 'playlist':
-                            this.props.searchPlaylist(this.state.query);
-                            break;
-                        case 'track':
-                            this.props.searchTrack(this.state.query);
-                            break;
-                        default:
-                            break;
-                    }
+                    this.props.history.push(`/search/${this.state.type}/${this.state.query}`);
                 }}>Search</Button>
             </div>
         );

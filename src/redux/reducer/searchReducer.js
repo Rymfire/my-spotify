@@ -1,7 +1,10 @@
 import searchConstants from "../constants/searchConstants";
 
 const initialState = {
-
+    album: {},
+    artist: {},
+    playlist: {},
+    track: {},
 };
 
 export default function searchReducer(state = initialState, action) {
@@ -19,7 +22,7 @@ export default function searchReducer(state = initialState, action) {
                 ...state,
                 album: {
                     requesting: false,
-                    result: action.data,
+                    result: action.data.albums,
                 }
             }
         case searchConstants.SEARCH_ALBUM_FAILURE:
@@ -44,7 +47,7 @@ export default function searchReducer(state = initialState, action) {
                 ...state,
                 artist: {
                     requesting: false,
-                    result: action.data,
+                    result: action.data.artists,
                 }
             }
         case searchConstants.SEARCH_ARTIST_FAILURE:
@@ -69,7 +72,7 @@ export default function searchReducer(state = initialState, action) {
                 ...state,
                 playlist: {
                     requesting: false,
-                    result: action.data,
+                    result: action.data.playlists,
                 }
             }
         case searchConstants.SEARCH_PLAYLIST_FAILURE:
@@ -94,7 +97,7 @@ export default function searchReducer(state = initialState, action) {
                 ...state,
                 track: {
                     requesting: false,
-                    result: action.data,
+                    result: action.data.tracks,
                 }
             }
         case searchConstants.SEARCH_TRACK_FAILURE:

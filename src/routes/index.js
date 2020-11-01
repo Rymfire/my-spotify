@@ -7,6 +7,7 @@ import Home from "./Home";
 import MyUserPage from "./MyUserPage";
 import Artist from "./Artist";
 import Album from "./Album";
+import Search from "./Search";
 
 export default function Router() {
     return (
@@ -16,6 +17,7 @@ export default function Router() {
                 <Route path="/me" component={MyUserPage}/>
                 <Route path="/artist/:uid" component={Artist}/>
                 <Route path="/album/:uid" component={Album}/>
+                <Route path="/search/:type/:query" component={Search}/>
             </div>
         </BrowserRouter>
     )
