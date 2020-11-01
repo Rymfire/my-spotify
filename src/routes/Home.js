@@ -16,7 +16,6 @@ class Home extends Component {
         return (
             <div>
                 <h1>Home</h1>
-                <Link to="/artist/3CnCGFxXbOA8bAK54jR8js">Vald</Link>
                 <SearchBar history={this.props.history}/>
                 <TopArtists history={this.props.history}/>
                 <TopTracks history={this.props.history}/>
