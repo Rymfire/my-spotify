@@ -1,5 +1,6 @@
 import {spotify} from "../services/spotify";
 import playlistConstants from "../constants/playlistConstants";
+import tokensActions from "./tokensActions";
 
 const playlistActions = {
     getAllMyUserPlaylists,
@@ -27,14 +28,16 @@ const myUserPlaylists = {
 
 function getAllMyUserPlaylists() {
     return (dispatch, getState) => {
-        const state = getState();
-        const tokens = state.tokens.tokens;
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const state = getState();
+            const tokens = state.tokens.tokens;
 
-        dispatch(myUserPlaylists.request());
-        spotify.getAllMyUserPlaylists(tokens).then(
-            res => dispatch(myUserPlaylists.success(res.data)),
-            error => dispatch(myUserPlaylists.failure(error))
-        );
+            dispatch(myUserPlaylists.request());
+            spotify.getAllMyUserPlaylists(tokens).then(
+                res => dispatch(myUserPlaylists.success(res.data)),
+                error => dispatch(myUserPlaylists.failure(error))
+            );
+        });
     }
 }
 

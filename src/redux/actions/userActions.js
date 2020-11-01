@@ -1,5 +1,6 @@
 import {spotify} from "../services/spotify";
 import userConstants from "../constants/userConstants";
+import tokensActions from "./tokensActions";
 
 const userActions = {
     getMyUser,
@@ -67,34 +68,40 @@ const user = {
 
 function getMyUser() {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        dispatch(myUser.request());
-        spotify.getMyUser(tokens.tokens).then(
-            res => dispatch(myUser.success(res.data)),
-            error => dispatch(myUser.failure(error))
-        )
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(myUser.request());
+            spotify.getMyUser(tokens.tokens).then(
+                res => dispatch(myUser.success(res.data)),
+                error => dispatch(myUser.failure(error))
+            )
+        });
     }
 }
 
 function getMyTop() {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        dispatch (myTop.request());
-        spotify.getTop(tokens.tokens).then(
-            res => myTop.success(res),
-            error => myTop.failure(error),
-        )
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(myTop.request());
+            spotify.getTop(tokens.tokens).then(
+                res => myTop.success(res),
+                error => myTop.failure(error),
+            )
+        });
     }
 }
 
 function getUser(uid) {
     return (dispatch, getState) => {
-        const {tokens, user} = getState();
-        dispatch(user.request());
-        spotify.getUser(tokens.tokens, uid).then(
-            res => dispatch(user.success(res.data)),
-            error => dispatch(user.failure(error))
-        )
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens, user} = getState();
+            dispatch(user.request());
+            spotify.getUser(tokens.tokens, uid).then(
+                res => dispatch(user.success(res.data)),
+                error => dispatch(user.failure(error))
+            )
+        });
     }
 }
 

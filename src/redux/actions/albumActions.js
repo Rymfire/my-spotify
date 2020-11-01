@@ -1,5 +1,6 @@
 import albumConstants from "../constants/albumConstants";
 import {spotify} from "../services/spotify";
+import tokensActions from "./tokensActions";
 
 const albumActions = {
     getAlbum,
@@ -27,13 +28,15 @@ const album = {
 
 function getAlbum(uid) {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        dispatch(album.request());
-        spotify.getAlbum(tokens.tokens, uid).then(
-            res => dispatch(album.success(res.data)),
-            error => dispatch(album.failure(error)),
-        );
-    };
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(album.request());
+            spotify.getAlbum(tokens.tokens, uid).then(
+                res => dispatch(album.success(res.data)),
+                error => dispatch(album.failure(error)),
+            );
+        });
+    }
 }
 
 export default albumActions;

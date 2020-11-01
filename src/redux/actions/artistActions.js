@@ -1,5 +1,6 @@
 import {spotify} from "../services/spotify";
 import artistConstants from "../constants/artistConstants";
+import tokensActions from "./tokensActions";
 
 const artistActions = {
     getArtist,
@@ -48,24 +49,28 @@ const artistAlbum = {
 
 function getArtist(uid) {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        dispatch(artist.request())
-        spotify.getArtist(tokens.tokens, uid).then(
-            res => dispatch(artist.success(res.data)),
-            error => dispatch(artist.failure(error))
-        );
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(artist.request())
+            spotify.getArtist(tokens.tokens, uid).then(
+                res => dispatch(artist.success(res.data)),
+                error => dispatch(artist.failure(error))
+            );
+        });
     }
 }
 
 function getArtistAlbum(uid) {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        dispatch(artistAlbum.request())
-        spotify.getArtistAlbum(tokens.tokens, uid).then(
-            res => dispatch(artistAlbum.success(res.data)),
-            error => dispatch(artistAlbum.failure(error))
-        );
-    };
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(artistAlbum.request())
+            spotify.getArtistAlbum(tokens.tokens, uid).then(
+                res => dispatch(artistAlbum.success(res.data)),
+                error => dispatch(artistAlbum.failure(error))
+            );
+        });
+    }
 }
 
 export default artistActions;
