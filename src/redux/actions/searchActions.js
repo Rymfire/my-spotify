@@ -1,5 +1,6 @@
 import {spotify} from "../services/spotify";
 import searchConstants from "../constants/searchConstants";
+import tokensActions from "./tokensActions";
 
 const searchActions = {
     searchAlbum,
@@ -90,41 +91,50 @@ const track = {
 
 function searchAlbum(query) {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        spotify.search(tokens.tokens, query, {type: 'album'}).then(
-            res => dispatch(album.success(res.data)),
-            error => dispatch(album.failure(error)),
-        )
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            spotify.search(tokens.tokens, query, {type: 'album'}).then(
+                res => dispatch(album.success(res.data)),
+                error => dispatch(album.failure(error)),
+            )
+        });
     };
 }
 
 function searchArtist(query) {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        spotify.search(tokens.tokens, query, {type: 'artist'}).then(
-            res => dispatch(artist.success(res.data)),
-            error => dispatch(artist.failure(error)),
-        )
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            spotify.search(tokens.tokens, query, {type: 'artist'}).then(
+                res => dispatch(artist.success(res.data)),
+                error => dispatch(artist.failure(error)),
+            )
+        })
     };
 }
 
 function searchPlaylist(query) {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        spotify.search(tokens.tokens, query, {type: 'playlist'}).then(
-            res => dispatch(playlist.success(res.data)),
-            error => dispatch(playlist.failure(error)),
-        )
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            spotify.search(tokens.tokens, query, {type: 'playlist'}).then(
+                res => dispatch(playlist.success(res.data)),
+                error => dispatch(playlist.failure(error)),
+            )
+        });
     };
 }
 
 function searchTrack(query) {
     return (dispatch, getState) => {
-        const {tokens} = getState();
-        spotify.search(tokens.tokens, query, {type: 'track'}).then(
-            res => dispatch(track.success(res.data)),
-            error => dispatch(track.failure(error)),
-        )
+        dispatch(tokensActions.getAccessToken()).then(() => {
+            const {tokens} = getState();
+            dispatch(track.request());
+            spotify.search(tokens.tokens, query, {type: 'track'}).then(
+                res => dispatch(track.success(res.data)),
+                error => dispatch(track.failure(error)),
+            )
+        });
     };
 }
 

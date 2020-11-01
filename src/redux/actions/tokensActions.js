@@ -65,8 +65,9 @@ function getAuthorizationCode() {
 function getAccessToken() {
     return (dispatch, getState) => {
         const {tokens} = getState();
-        dispatch(accessToken.request());
+        const date = new Date();
         if (!tokens.tokens.access_token) {
+            dispatch(accessToken.request());
             return spotify.getAccessTokenWithAuthorizationCode(tokens.authorization_code.code).then(
                 res => {
                     dispatch(accessToken.success(res.data));
@@ -75,7 +76,8 @@ function getAccessToken() {
                     dispatch(accessToken.failure(err));
                 }
             );
-        } else {
+        } else if (tokens.tokens.validity < date.valueOf()) {
+            dispatch(accessToken.request());
             return spotify.getAccessTokenWithRefreshToken(tokens.tokens.refresh_token).then(
                 res => {
                     dispatch(accessToken.success(res.data));
@@ -84,6 +86,8 @@ function getAccessToken() {
                     dispatch(accessToken.failure(err));
                 }
             );
+        } else {
+            return new Promise((resolve, reject) => {resolve({status: 200})});
         }
     }
 }
