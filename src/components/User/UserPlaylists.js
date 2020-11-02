@@ -4,9 +4,11 @@ import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@materia
 
 class UserPlaylists extends Component {
     formateArtists(artistsList) {
-        let formatedArtists = null;
+        let formatedArtists = [];
         for (const artist in artistsList) {
-            formatedArtists = (!formatedArtists) ? artistsList[artist].name :`${formatedArtists}, ${artistsList[artist].name}`;
+            formatedArtists.push(<a href={`/artist/${artistsList[artist].id}`}>{artistsList[artist].name}</a>);
+            if (artistsList[artist - 0 + 1])
+                formatedArtists.push(', ');
         }
         return formatedArtists;
     }
