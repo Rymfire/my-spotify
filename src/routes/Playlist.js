@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import React, {Component} from "react";
 import playlistActions from "../redux/actions/playlistActions";
 import TrackList from "../components/Playlist/TrackList";
+import MyAppBar from "../components/global/MyAppBar";
 
 class Playlist extends Component {
     componentDidMount() {
@@ -20,6 +21,7 @@ class Playlist extends Component {
         if (this.props.playlist.playlist.data && Object.keys(this.props.playlist.playlist.data).length !== 0) {
             return (
                 <div>
+                    <MyAppBar history={this.props.history}/>
                     <div>
                         <img src={this.props.playlist.playlist.data.images[0].url} alt={this.props.playlist.playlist.data.name}/>
                         <p>{this.props.playlist.playlist.data.name}</p>

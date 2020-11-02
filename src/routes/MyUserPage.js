@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import tokensActions from "../redux/actions/tokensActions";
 import userActions from "../redux/actions/userActions";
 import playlistActions from "../redux/actions/playlistActions";
+import MyAppBar from "../components/global/MyAppBar";
 
 class MyUserPage extends Component {
 
@@ -13,6 +14,7 @@ class MyUserPage extends Component {
         if (this.props.tokens.authorization_code.code) {
             return (
                 <div>
+                    <MyAppBar history={this.props.history}/>
                     <button onClick={this.props.getAccessToken}>Refresh</button>
                     <button onClick={this.props.getMyUser}>User</button>
                     <button onClick={this.props.getAllMyUserPlaylists}>Playlists</button>

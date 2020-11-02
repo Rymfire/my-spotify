@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import albumActions from "../redux/actions/albumActions";
 import TrackList from "../components/Album/TrackList";
 import Link from "@material-ui/core/Link";
+import MyAppBar from "../components/global/MyAppBar";
 
 class Album extends Component {
 
@@ -23,6 +24,7 @@ class Album extends Component {
             const copyrights = this.props.album.result.copyrights.map((value) => <p>{value.text}</p>)
             return (
                 <div>
+                    <MyAppBar history={this.props.history}/>
                     <div>
                         <img src={this.props.album.result.images[1].url} alt="this.props.album.result.name"/>
                         <p>{this.props.album.result.name}</p>

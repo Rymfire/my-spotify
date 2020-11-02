@@ -8,6 +8,7 @@ import {
     CardContent,
     Typography,
 } from "@material-ui/core";
+import MyAppBar from "../components/global/MyAppBar";
 
 class Search extends Component {
     componentDidMount() {
@@ -110,6 +111,7 @@ class Search extends Component {
             && this.props.search[this.props.match.params.type].result.items) {
             return (
                 <div>
+                    <MyAppBar history={this.props.history}/>
                     {this.generateCardView(this.formateData())}
                 </div>
             );

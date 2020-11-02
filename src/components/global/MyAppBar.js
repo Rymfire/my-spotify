@@ -30,7 +30,7 @@ class MyAppBar extends Component {
 
     render() {
         return (
-            <AppBar>
+            <AppBar position="static">
                 <Typography>MySpotify</Typography>
                 <SearchBar history={this.props.history}/>
                 <div>

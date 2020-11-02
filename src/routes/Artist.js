@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import artistActions from "../redux/actions/artistActions";
 import AlbumList from "../components/AlbumList";
+import MyAppBar from "../components/global/MyAppBar";
 
 class Artist extends Component {
     componentDidMount() {
@@ -12,6 +13,7 @@ class Artist extends Component {
     render() {
         return (
             <div>
+                <MyAppBar history={this.props.history}/>
                 Artist: {this.props.match.params.uid}
                 <AlbumList history={this.props.history} value={this.props.artist.albums}/>
             </div>
