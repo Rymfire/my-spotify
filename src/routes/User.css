@@ -1,0 +1,9 @@
+.user-section {
+    display: flex;
+    margin: 17px;
+}
+
+.user-description {
+    align-self: center;
+    margin-left: 17px;
+}

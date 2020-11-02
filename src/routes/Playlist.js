@@ -4,6 +4,8 @@ import playlistActions from "../redux/actions/playlistActions";
 import TrackList from "../components/Playlist/TrackList";
 import MyAppBar from "../components/global/MyAppBar";
 
+import "./Playlist.css"
+
 class Playlist extends Component {
     componentDidMount() {
         this.props.getPlaylist(this.props.match.params.uid);
@@ -24,10 +26,20 @@ class Playlist extends Component {
             return (
                 <div>
                     <MyAppBar history={this.props.history}/>
-                    <div>
-                        <img src={this.props.playlist.playlist.data.images[0].url} alt={this.props.playlist.playlist.data.name}/>
-                        <p>{this.props.playlist.playlist.data.name}</p>
-                        <p>By: {this.props.playlist.playlist.data.owner.display_name}</p>
+                    <div className="playlist-section">
+                        <img
+                            src={this.props.playlist.playlist.data.images[0].url}
+                            alt={this.props.playlist.playlist.data.name}
+                            style={{
+                                borderRadius: 40,
+                                width: 400,
+                                height: 400,
+                            }}
+                        />
+                        <div className="playlist-description">
+                            <h1 className="title">{this.props.playlist.playlist.data.name}</h1>
+                            <p className="owner">By: <a href={`/user/${this.props.playlist.playlist.data.owner.id}`}>{this.props.playlist.playlist.data.owner.display_name}</a></p>
+                        </div>
                     </div>
                     <TrackList value={this.props.playlist.playlist.data.tracks}/>
                 </div>

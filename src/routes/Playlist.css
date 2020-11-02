@@ -1,0 +1,17 @@
+.playlist-section {
+    display: flex;
+    margin-top: 17px;
+    margin-bottom: 17px;
+    margin-left: 20px;
+}
+
+.playlist-description {
+    align-self: flex-end;
+    margin-left: 17px;
+}
+
+.playlist-description .title {}
+
+.playlist-description .owner {
+    font-weight: bold;
+}
