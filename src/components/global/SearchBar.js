@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import {
     Select,
-    FormControl,
-    InputLabel,
     TextField,
     Button,
 } from "@material-ui/core";

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SearchBar from "../components/global/SearchBar";
 import {connect} from "react-redux";
 import userActions from "../redux/actions/userActions";
 import tokensActions from "../redux/actions/tokensActions";
