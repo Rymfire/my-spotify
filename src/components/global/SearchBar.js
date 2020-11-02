@@ -38,7 +38,6 @@ class SearchBar extends Component {
         return (
             <div className="search-bar">
                 <TextField
-                    variant="filled"
                     placeholder="Search"
                     value={this.state.query}
                     error={this.state.error}
@@ -89,7 +88,6 @@ class SearchBar extends Component {
                     }}
                     disableElevation
                     onClick={this.handleSubmit}>Search</Button>
-                    }}
             </div>
         );
     }
