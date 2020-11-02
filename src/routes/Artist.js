@@ -14,7 +14,11 @@ class Artist extends Component {
         return (
             <div>
                 <MyAppBar history={this.props.history}/>
-                Artist: {this.props.match.params.uid}
+                <div>
+                    <img src={this.props.artist.data.images[1].url} alt="this.props.artist.data.name"/>
+                    <p>{this.props.artist.data.name}</p>
+                    <p>{this.props.artist.data.followers.total} followers</p>
+                </div>
                 <AlbumList history={this.props.history} value={this.props.artist.albums}/>
             </div>
         );
