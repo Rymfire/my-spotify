@@ -15,6 +15,7 @@ class SearchBar extends Component {
         this.state = {
             type: "track",
             query: "",
+            error: null,
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -31,6 +32,7 @@ class SearchBar extends Component {
                 <TextField
                     placeholder="Search"
                     value={this.state.query}
+                    error={this.state.error}
                     onChange={this.handleChange}
                     inputProps={{
                         name: 'query',
@@ -55,7 +57,12 @@ class SearchBar extends Component {
                     </Select>
                 </FormControl>
                 <Button onClick={() => {
-                    this.props.history.push(`/search/${this.state.type}/${this.state.query}`);
+                    if (this.state.query.length === 0) {
+                        this.setState({error: "This field can't be empty"})
+                    } else {
+                        this.setState({error: null})
+                        this.props.history.push(`/search/${this.state.type}/${this.state.query}`);
+                    }
                 }}>Search</Button>
             </div>
         );
