@@ -11,6 +11,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {AccountCircle} from "@material-ui/icons";
 import SearchBar from "./SearchBar";
+import userActions from "../../redux/actions/userActions";
 
 class MyAppBar extends Component {
 
@@ -20,6 +21,11 @@ class MyAppBar extends Component {
             anchorEl: null,
         }
     }
+
+    componentDidMount() {
+        this.props.getMyUser();
+    }
+
     handleMenu = (event) => {
         this.setState({anchorEl: event.currentTarget});
     };
@@ -34,18 +40,25 @@ class MyAppBar extends Component {
                 <Typography>MySpotify</Typography>
                 <SearchBar history={this.props.history}/>
                 <div>
-                    <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={this.handleMenu}
-                        color="inherit"
-                    >
-                        {(this.props.user.myUser.images.length !== 0)
-                            ? <img src={this.props.user.myUser.images[0]} alt={this.props.user.myUser.name}/>
-                            : <AccountCircle/>
-                        }
-                    </IconButton>
+                    {
+                        (this.props.user.myUser && Object.keys(this.props.user.myUser).length !== 0) ?
+                        <div>
+                            <IconButton
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={this.handleMenu}
+                                color="inherit"
+                            >
+                                {(this.props.user.myUser.images.length !== 0)
+                                    ? <img src={this.props.user.myUser.images[0]} alt={this.props.user.myUser.name}/>
+                                    : <AccountCircle/>
+                                }
+                            </IconButton>
+                            <Typography>{this.props.user.myUser.name}</Typography>
+                        </div>
+                            : null
+                    }
                     <Menu
                         id="menu-appbar"
                         anchorEl={this.state.anchorEl}
@@ -76,6 +89,7 @@ function mapStateToProps(state) {
 
 const actionCreators = {
     logout: tokensActions.logout,
+    getMyUser: userActions.getMyUser,
 }
 
 export default connect(mapStateToProps, actionCreators)(MyAppBar);
