@@ -7,6 +7,7 @@ import {
     CardMedia,
     CardContent,
     Typography,
+    Grid,
 } from "@material-ui/core";
 import MyAppBar from "../components/global/MyAppBar";
 
@@ -83,25 +84,27 @@ class Search extends Component {
 
     generateCardView(data) {
         return data.map((item) =>
-            <Card>
-                <CardActionArea onClick={() => this.props.history.push(item.url)}>
-                    {(item.image) ? <CardMedia
-                        component="img"
-                        height="250"
-                        width="250"
-                        image={item.image}
-                        title="Card media"
-                    /> : null}
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {item.title}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {item.subTitle}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+            <Grid item xs={6} md={3} xl={2}>
+                <Card>
+                    <CardActionArea onClick={() => this.props.history.push(item.url)}>
+                        {(item.image) ? <CardMedia
+                            component="img"
+                            height="250"
+                            width="250"
+                            image={item.image}
+                            title="Card media"
+                            /> : null}
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {item.title}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {item.subTitle}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Grid>
         );
     }
 
@@ -112,7 +115,17 @@ class Search extends Component {
             return (
                 <div>
                     <MyAppBar history={this.props.history}/>
-                    {this.generateCardView(this.formateData())}
+                    <Grid
+                        container
+                        spacing={2}
+                        style={{
+                            width: '100%',
+                            margin: '0px',
+                        }}
+                        alignItems="stretch"
+                    >
+                        {this.generateCardView(this.formateData())}
+                    </Grid>
                 </div>
             );
         } else {
