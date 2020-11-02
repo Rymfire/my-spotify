@@ -1,0 +1,25 @@
+.album-section {
+    display: flex;
+    margin-left: 20px;
+}
+
+.album-description {
+    align-self: flex-end;
+    margin-left: 17px;
+}
+
+.album-description .title {}
+
+.album-description .artist {
+    font-weight: bold;
+}
+
+.album-description .release {
+    font-style: italic;
+}
+
+.album-description .copyright {
+    color: grey;
+    font-size: 11px;
+    font-style: italic;
+}
