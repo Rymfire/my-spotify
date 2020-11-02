@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import {connect} from "react-redux";
 import searchActions from "../../redux/actions/searchActions";
+import './SearchBar.css';
 
 class SearchBar extends Component {
     constructor(props) {
@@ -27,15 +28,18 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div>
+            <div className="search-bar">
                 <TextField
+                    variant="filled"
                     placeholder="Search"
                     value={this.state.query}
                     onChange={this.handleChange}
                     inputProps={{
                         name: 'query',
-                        id: 'searchbar-query-input'
+                        id: 'searchbar-query-input',
                     }}
+                    color="primary"
+                    className="form"
                 />
                 <FormControl>
                     <InputLabel>Type</InputLabel>
@@ -47,6 +51,7 @@ class SearchBar extends Component {
                             name: 'type',
                             id: 'searchbar-type-select'
                         }}
+                        color="primary"
                     >
                         <option value="album">Album</option>
                         <option value="artist">Artist</option>
@@ -54,9 +59,21 @@ class SearchBar extends Component {
                         <option value="track">Track</option>
                     </Select>
                 </FormControl>
-                <Button onClick={() => {
-                    this.props.history.push(`/search/${this.state.type}/${this.state.query}`);
-                }}>Search</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                    style={{
+                        borderRadius: 99,
+                        fontWeight: '800',
+                        color: 'black',
+                    }}
+                    disableElevation
+                    onClick={() => {
+                        this.props.history.push(`/search/${this.state.type}/${this.state.query}`);
+                    }}>
+                    Search
+                </Button>
             </div>
         );
     }
