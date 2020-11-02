@@ -6,6 +6,7 @@ import tokensActions from "../redux/actions/tokensActions";
 import TopArtists from "../components/Home/TopArtists";
 import TopTracks from "../components/Home/TopTracks";
 import MyPlaylists from "../components/Home/MyPlaylists";
+import MyAppBar from "../components/global/MyAppBar";
 
 class Home extends Component {
     componentDidMount() {
@@ -15,7 +16,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>Home</h1>
+                <MyAppBar history={this.props.history}/>
                 <SearchBar history={this.props.history}/>
                 <MyPlaylists history={this.props.history}/>
                 <TopArtists history={this.props.history}/>
