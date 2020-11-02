@@ -7,6 +7,8 @@ import TopTracks from "../components/Home/TopTracks";
 import MyPlaylists from "../components/Home/MyPlaylists";
 import MyAppBar from "../components/global/MyAppBar";
 
+import './Home.css';
+
 class Home extends Component {
     componentDidMount() {
         this.props.getAllTop();
@@ -14,12 +16,14 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
+            <div className="home">
                 <MyAppBar history={this.props.history}/>
+                <h2>My Playlists</h2>
                 <MyPlaylists history={this.props.history}/>
+                <h2>Top Artists</h2>
                 <TopArtists history={this.props.history}/>
+                <h2>Top Tracks</h2>
                 <TopTracks history={this.props.history}/>
-                <button onClick={this.props.logout}>logout</button>
             </div>
         );
     }

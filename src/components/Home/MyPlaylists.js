@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
+import {Grid, Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 
 class MyPlaylists extends Component {
     formateArtists(artistsList) {
@@ -13,25 +13,32 @@ class MyPlaylists extends Component {
 
     generateCardView(data) {
         return data.map((item) =>
-            <Card key={`${item.name}-MyPlaylists`}>
-                <CardActionArea onClick={() => this.props.history.push(`/playlist/${item.id}`)}>
-                    {(item.images && item.images.length !== 0) ? <CardMedia
-                        component="img"
-                        height="250"
-                        width="250"
-                        image={item.images[0].url}
-                        title={item.name}
-                    /> : null}
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {item.name}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            By: {item.owner.display_name}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+            <Grid
+                item
+                xs={6}
+                md={3}
+                xl={2}
+            >
+                <Card key={`${item.name}-MyPlaylists`}>
+                    <CardActionArea onClick={() => this.props.history.push(`/playlist/${item.id}`)}>
+                        {(item.images && item.images.length !== 0) ? <CardMedia
+                            component="img"
+                            height="250"
+                            width="250"
+                            image={item.images[0].url}
+                            title={item.name}
+                            /> : null}
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {item.name}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                By: {item.owner.display_name}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Grid>
         );
     }
 
@@ -40,7 +47,17 @@ class MyPlaylists extends Component {
             const cardView = this.generateCardView(this.props.user.myPlaylists.result.items)
             return (
                 <div>
-                    {cardView}
+                    <Grid
+                        container
+                        spacing={2}
+                        style={{
+                            width: '100%',
+                            margin: '0px',
+                        }}
+                        alignItems="stretch"
+                    >
+                        {cardView}
+                    </Grid>
                 </div>
             )
         } else {

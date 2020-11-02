@@ -6,6 +6,7 @@ import {
 } from "@material-ui/core";
 import {connect} from "react-redux";
 import searchActions from "../../redux/actions/searchActions";
+import './SearchBar.css';
 
 class SearchBar extends Component {
     constructor(props) {
@@ -37,13 +38,14 @@ class SearchBar extends Component {
         return (
             <div className="search-bar">
                 <TextField
+                    variant="filled"
                     placeholder="Search"
                     value={this.state.query}
                     error={this.state.error}
                     onChange={this.handleChange}
                     inputProps={{
                         name: 'query',
-                        id: 'searchbar-query-input'
+                        id: 'searchbar-query-input',
                     }}
                     style={{
                         backgroundColor: "white",
@@ -87,6 +89,7 @@ class SearchBar extends Component {
                     }}
                     disableElevation
                     onClick={this.handleSubmit}>Search</Button>
+                    }}
             </div>
         );
     }
