@@ -1,0 +1,25 @@
+#my-app-bar {
+    background-color: darkslategrey;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.test {
+    background-color: blue;
+}
+
+.my-spotify-icon {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-spotify-icon img {
+    width: 60px;
+    height: 60px;
+}
+
+.my-spotify-icon a {
+    width: 60px;
+    height: 60px;
+}

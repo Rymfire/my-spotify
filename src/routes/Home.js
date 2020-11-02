@@ -17,7 +17,6 @@ class Home extends Component {
         return (
             <div>
                 <MyAppBar history={this.props.history}/>
-                <SearchBar history={this.props.history}/>
                 <MyPlaylists history={this.props.history}/>
                 <TopArtists history={this.props.history}/>
                 <TopTracks history={this.props.history}/>
