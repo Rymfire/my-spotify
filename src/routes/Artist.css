@@ -1,0 +1,15 @@
+.artist-section {
+    display: flex;
+    margin-left: 20px;
+}
+
+.artist-info {
+    align-self: center;
+    margin-left: 17px;
+}
+
+.artist-info .name {}
+
+.artist-info .followers {
+    color: grey;
+}

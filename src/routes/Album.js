@@ -4,6 +4,8 @@ import albumActions from "../redux/actions/albumActions";
 import TrackList from "../components/Album/TrackList";
 import MyAppBar from "../components/global/MyAppBar";
 
+import "./Album.css"
+
 class Album extends Component {
 
     componentDidMount() {
@@ -20,16 +22,24 @@ class Album extends Component {
 
     render() {
         if (this.props.album.result && Object.keys(this.props.album.result).length !== 0) {
-            const copyrights = this.props.album.result.copyrights.map((value) => <p>{value.text}</p>)
+            const copyrights = this.props.album.result.copyrights.map((value) => <p className="copyright">{value.text}</p>)
             return (
                 <div>
                     <MyAppBar history={this.props.history}/>
-                    <div>
-                        <img src={this.props.album.result.images[1].url} alt={this.props.album.result.name}/>
-                        <p>{this.props.album.result.name}</p>
-                        By: {this.formateArtists(this.props.album.result.artists)}
-                        <p>Release: {this.props.album.result.release_date}</p>
-                        {copyrights}
+                    <div className="album-section">
+                        <img
+                            src={this.props.album.result.images[1].url}
+                            alt={this.props.album.result.name}
+                            style={{
+                                borderRadius: 40
+                            }}
+                        />
+                        <div className="album-description">
+                            <h1 className="title">{this.props.album.result.name}</h1>
+                            <p className="artist">By: {this.formateArtists(this.props.album.result.artists)}</p>
+                            <p className="release">Release: {this.props.album.result.release_date}</p>
+                            {copyrights}
+                        </div>
                     </div>
                     <TrackList value={this.props.album.result.tracks}/>
                 </div>
