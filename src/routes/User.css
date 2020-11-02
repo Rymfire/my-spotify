@@ -1,6 +1,8 @@
 .user-section {
     display: flex;
-    margin: 17px;
+    margin-top: 17px;
+    margin-bottom: 17px;
+    margin-left: 20px;
 }
 
 .user-description {

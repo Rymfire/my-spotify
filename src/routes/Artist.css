@@ -1,5 +1,7 @@
 .artist-section {
     display: flex;
+    margin-top: 17px;
+    margin-bottom: 17px;
     margin-left: 20px;
 }
 
