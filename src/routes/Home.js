@@ -36,8 +36,11 @@ class Home extends Component {
                         LOGOUT
                     </Button>
                 </div>
+                <h2>My Playlists</h2>
                 <MyPlaylists history={this.props.history}/>
+                <h2>Top Artists</h2>
                 <TopArtists history={this.props.history}/>
+                <h2>Top Tracks</h2>
                 <TopTracks history={this.props.history}/>
             </div>
         );
