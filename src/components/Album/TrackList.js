@@ -6,6 +6,7 @@ import {
     TableRow,
     TableCell,
     TableBody,
+    Table,
 } from "@material-ui/core";
 
 export default class TrackList extends Component {
@@ -34,9 +35,9 @@ export default class TrackList extends Component {
     formateTrackLine(track) {
         return (
             <TableRow>
-                <TableCell align="right">{track.track_number}</TableCell>
-                <TableCell align="right">{track.name}</TableCell>
-                <TableCell align="right">{this.formateArtists(track.artists)}</TableCell>
+                <TableCell align="left">{track.track_number}</TableCell>
+                <TableCell align="left">{track.name}</TableCell>
+                <TableCell align="left">{this.formateArtists(track.artists)}</TableCell>
                 <TableCell align="right">{this.formateDuration(track.duration_ms)}</TableCell>
             </TableRow>
         );
@@ -45,18 +46,20 @@ export default class TrackList extends Component {
     render() {
         const formatedLineList = this.props.value.items.map((value) => this.formateTrackLine(value));
         return (
-            <TableContainer component={Paper}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="right">#</TableCell>
-                        <TableCell align="right">Title</TableCell>
-                        <TableCell align="right">Artist</TableCell>
-                        <TableCell align="right">Duration</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {formatedLineList}
-                </TableBody>
+            <TableContainer style={{width: "100%"}} component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="left">#</TableCell>
+                            <TableCell align="left">Title</TableCell>
+                            <TableCell align="left">Artist</TableCell>
+                            <TableCell align="right">Duration</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {formatedLineList}
+                    </TableBody>
+                </Table>
             </TableContainer>
         );
     }
